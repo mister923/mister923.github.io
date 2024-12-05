@@ -1,90 +1,592 @@
+:root {
+    --primary: #1c3f7c;
+    --primary-light: #2855a3;
+    --secondary: #545454;
+    --dark: #010101;
+    --background: #1a1d24;
+}
+
 body, html {
-    height: 100%;
     margin: 0;
-    font-family: 'Zen Dots', cursive;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-  
-  .bg {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.postimg.cc/zvw38C6g/891bc83e-76a1-470b-a1a7-33d51545c094-1.webp');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    padding: 0;
+    font-family: 'Chakra Petch', sans-serif;
+    background-color: var(--background);
+    color: white;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Navbar */
+.navbar {
     position: fixed;
+    top: 0;
     width: 100%;
-    height: 100%;
+    background-color: rgba(26, 29, 36, 0.98);
+    padding: 1rem 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--background), var(--primary-light));
+    position: relative;
+    z-index: 50;
+    margin-top: 70px;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    position: relative;
+}
+
+.hero-text {
+    flex: 1;
+    position: relative;
+    z-index: 75;
+}
+
+.animation-container {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    border-radius: 50%;
+    overflow: visible;
+    background: rgba(28, 63, 124, 0.1);
+    box-shadow: 
+        0 0 50px rgba(28, 63, 124, 0.3),
+        inset 0 0 30px rgba(40, 85, 163, 0.2);
+    z-index: 25;
+}
+
+.wave {
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    border-radius: 45%;
+    left: -100%;
+    top: -100%;
+    opacity: 0.8;
+    mix-blend-mode: soft-light;
+}
+
+.wave:nth-child(1) {
+    animation: wave 12s infinite linear;
+    background: linear-gradient(
+        45deg,
+        rgba(28, 63, 124, 0.8),
+        rgba(40, 85, 163, 0.4)
+    );
+}
+
+.wave:nth-child(2) {
+    animation: wave 16s infinite linear;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.3),
+        rgba(28, 63, 124, 0.6)
+    );
+    transform-origin: 49% 51%;
+}
+
+.wave:nth-child(3) {
+    animation: wave 20s infinite linear;
+    background: linear-gradient(
+        45deg,
+        rgba(28, 63, 124, 0.5),
+        rgba(40, 85, 163, 0.8)
+    );
+    transform-origin: 51% 49%;
+}
+
+@keyframes wave {
+    0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+        opacity: 0.6;
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 
+            0 0 50px rgba(28, 63, 124, 0.3),
+            inset 0 0 30px rgba(40, 85, 163, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 0 100px rgba(28, 63, 124, 0.5),
+            inset 0 0 50px rgba(40, 85, 163, 0.3);
+    }
+    100% {
+        box-shadow: 
+            0 0 50px rgba(28, 63, 124, 0.3),
+            inset 0 0 30px rgba(40, 85, 163, 0.2);
+    }
+}
+
+@media (max-width: 768px) {
+    .animation-container {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .wave {
+        width: 250%;
+        height: 250%;
+        left: -75%;
+        top: -75%;
+    }
+}
+
+/* Add floating effect to container */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.animation-container {
+    animation: 
+        pulse 4s infinite ease-in-out,
+        float 6s infinite ease-in-out;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-text h2 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: white;
+    opacity: 0.9;
+}
+
+.rotating-text {
+    height: 4rem;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: var(--primary-light);
+    position: relative;
+    z-index: 75;
+}
+
+.rotating-text span {
+    position: absolute;
+    opacity: 0;
+    animation: rotateWords 9s linear infinite;
+}
+
+.rotating-text span:nth-child(2) {
+    animation-delay: 3s;
+}
+
+.rotating-text span:nth-child(3) {
+    animation-delay: 6s;
+}
+
+@keyframes rotateWords {
+    0%, 27% { opacity: 0; transform: translateY(30px); }
+    33%, 60% { opacity: 1; transform: translateY(0); }
+    66%, 100% { opacity: 0; transform: translateY(-30px); }
+}
+
+.capabilities {
+    background: white;
+    padding: 6rem 0;
+    position: relative;
+    z-index: 150;
+}
+
+.capabilities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.capability-card {
+    padding: 2.5rem;
+    background: linear-gradient(145deg, rgba(28, 63, 124, 0.05), rgba(28, 63, 124, 0.02));
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(28, 63, 124, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.capability-card::before {
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
-  }
-  
-  .content {
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.capability-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(28, 63, 124, 0.1);
+}
+
+.capability-card:hover::before {
+    opacity: 1;
+}
+
+.capability-card h3 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
     position: relative;
-    width: 100%;  /* Takes the full width to utilize the center alignment of the parent flexbox */
-    display: flex;  /* Enables flexbox properties */
-    flex-direction: column;  /* Stacks the children vertically */
-    align-items: center;  /* Center aligns the children horizontally */
-    justify-content: center;  /* Center aligns the children vertically */
-    height: 100%;  /* Takes full height to align vertically within the body */
+}
+
+.capability-card p {
+    color: var(--secondary);
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.mission {
+    padding: 6rem 0;
+    background: var(--primary);
+    color: white;
     text-align: center;
+}
+
+.mission h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.mission p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* Add responsive styles */
+@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .animation-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    .capabilities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-text h2 {
+        font-size: 2rem;
+    }
+
+    .rotating-text {
+        font-size: 2.5rem;
+    }
+
+    .wave {
+        animation-duration: 6s, 8s, 10s;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: #0f1116;
+    padding: 3rem 0;
+    color: #ffffff;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.footer-section h4 {
     color: white;
-  }
-  
-  .header {
-    font-size: 6vw;
-    font-weight: bold;
-  }
-  
-  .subheader {
-    font-size: 24px;
-    margin-top: 20px;
-  }
-  
-  .email {
-    font-size: 1em;
-    color: #aaaaaa;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.footer-section p {
+    font-size: 0.9rem;
+    color: var(--secondary);
+}
+
+.footer-logo {
+    height: 30px;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+.footer-section a {
+    color: var(--secondary);
     text-decoration: none;
-    border: 1px solid #aaaaaa;
-    padding: 10px 0px;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    border-top: 1px solid #2a2e35;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Add responsive design for footer */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Update hero text styles */
+.hero-headline {
+    font-size: 2.2rem;
+    margin: 0;
+    color: #ffffff;
+    opacity: 0.9;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.rotating-text {
+    height: 4rem;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #ff4b4b;  /* Add attention-grabbing color for threat messaging */
+    position: relative;
+    z-index: 75;
+}
+
+/* Add new threat banner section */
+.threat-banner {
+    background: var(--primary);
+    padding: 1.5rem 0;
+    position: relative;
+    z-index: 150;
+}
+
+.threat-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shine 3s infinite;
+}
+
+.threat-banner p {
+    text-align: center;
+    font-size: 1.3rem;
+    color: white;
+    margin: 0;
+    position: relative;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Update capabilities section */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    color: var(--primary);
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-intro {
+    color: var(--secondary);
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+    .hero-headline {
+        font-size: 1.8rem;
+    }
+    
+    .rotating-text {
+        font-size: 2.2rem;
+    }
+    
+    .threat-banner p {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+}
+
+/* Add hover effect for logos */
+.logo img, .footer-logo {
+    transition: opacity 0.3s ease;
+}
+
+.logo img:hover, .footer-logo:hover {
+    opacity: 0.8;
+}
+
+/* Add logo container styles */
+.logo-container {
     display: flex;
-    justify-content: center;
     align-items: center;
-  }
-  
-  .email:hover, .email:focus {
-    background-color: #aaaaaa;
-    color: black;
-  }
-  
-  .email a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  .email a:hover, .email a:focus {
+    gap: 1rem;
+    margin-left: 0;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
     color: white;
-    text-decoration: underline;
-  }
-  
-  .email a:active {
-    color: gray;
-    text-decoration: underline;
-  }
-  
-  @media (max-width: 600px) {
-    .header {
-      font-size: 56px;  /* Set to minimum */
+    letter-spacing: 0.5px;
+}
+
+/* Update existing logo styles */
+.logo-container img {
+    height: 40px;
+    width: auto;
+}
+
+/* Update footer logo styles */
+.footer-section .logo-container {
+    margin-bottom: 1rem;
+}
+
+.footer-section .logo-container img {
+    height: 30px;
+}
+
+.footer-section .logo-text {
+    font-size: 1.3rem;
+}
+
+/* Add hover effect for entire logo container */
+.logo-container {
+    transition: opacity 0.3s ease;
+}
+
+.logo-container:hover {
+    opacity: 0.8;
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+    .logo-text {
+        font-size: 1.3rem;
     }
-  }
-  
-  @media (min-width: 1920px) {
-    .header {
-      font-size: 120px;  /* Set to maximum */
+    
+    .footer-section .logo-text {
+        font-size: 1.2rem;
     }
-  }
+}
+
+/* Add responsive adjustments */
+@media (max-width: 768px) {
+    .capabilities, .threat-banner {
+        top: 60px;
+    }
+    
+    .hero {
+        padding-top: 60px;
+    }
+}
+
+/* Update navbar container padding */
+.navbar .container {
+    padding: 0 0.5rem;
+}
+
+/* Update logo container positioning */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 0;
+}
+
+/* Ensure consistent spacing on mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+    
+    .navbar .container {
+        padding: 0 0.25rem;
+    }
+    
+    .logo-container {
+        margin-left: 0;
+    }
+}
   
   
